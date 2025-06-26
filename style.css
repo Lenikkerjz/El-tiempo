@@ -4,7 +4,9 @@ font-family: 'poppins', sans-serif;
 box-sizing: border-box;
 }
 
-
+body{
+    color: #ffff
+}
 
 .card{
     width: 90%;
