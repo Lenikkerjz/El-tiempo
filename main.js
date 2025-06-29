@@ -1,39 +1,22 @@
-const apiKey = "09a94a40ed6ef2cef3cdb2da5d115ce0";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=&units=metric&appid=";
+const apiKey = "530685ac19923b9deb7e76c28659c8c4";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-async function checkweather() {
-    const response = await fetch(apiUrl + `&appid=${apiKey}`)
+const  searchBox = document.querySelector(".search input")
+const  searchBtn = document.querySelector(".search button")
+
+async function checkWeather(city) {
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     var data = await response.json();
 
     console.log(data)
-    
-    document.querySelector(".city").innerHTML = data
+
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".temp").innerHTML =  Math.round(data.main.temp) + "°c";
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+
 }
 
-/*let clima = {
-    apiKey: "09a94a40ed6ef2cef3cdb2da5d115ce0",
-    fetchClima:function(ciudad){
-        fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=" 
-            + ciudad
-            +"&units=metric&appid="
-            +this.apiKey
-        )
-        .then((response)=>{
-            return response.json();
-        })
-        .then((data)=>this.mostrarClima(data));
-    },
-    mostrarClima:function(data){
-        const {temp} = data.main;
-        document.querySelector("#temp").innerHTML = temp + " &#8451";
-    }
-}
-
-let ciudad = document.querySelector("#ciudad")
-ciudad.addEventListener("change", function(){
-    clima.fetchClima(ciudad.value)
+searchBtn.addEventListener("click", () =>{
+    checkWeather(searchBox.value);
 })
-
-clima.fetchClima("clima")
-*/
